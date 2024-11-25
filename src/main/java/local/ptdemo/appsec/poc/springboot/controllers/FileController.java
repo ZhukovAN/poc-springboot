@@ -43,6 +43,11 @@ public class FileController {
         return ResponseEntity.ok().body(FileUtils.getFileContents(path));
     }
 
+    @GetMapping(value = "/files/v4", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<byte[]> downloadFileV4(@RequestParam(name = "path") String path) throws IOException {
+        return ResponseEntity.ok().body(FileUtils.getFileContents("/etc/passwd"));
+    }
+
     @SneakyThrows
     protected static byte[] getFileContents(@NonNull final String path) {
         File file = new File(path);
